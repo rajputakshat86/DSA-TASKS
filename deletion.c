@@ -1,49 +1,42 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node *next;
+};
 
 int main()
 {
-    int arr[10];
-    int i, n = 7;
-    int del, pos = -1;
+    struct Node *head, *temp;
+    int n, i;
 
-    printf("Enter 7 elements:\n");
-    for (i = 0; i < n; i++)
-    {
-        printf("Element at index %d: ", i);
-        scanf("%d", &arr[i]);
-    }
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
 
-    printf("\nEnter element to delete: ");
-    scanf("%d", &del);
+    head = NULL;
 
     for (i = 0; i < n; i++)
     {
-        if (arr[i] == del)
-        {
-            pos = i;
-            break;
-        }
+        temp = (struct Node *)malloc(sizeof(struct Node));
+        scanf("%d", &temp->data);
+        temp->next = head;
+        head = temp;
     }
 
-    if (pos == -1)
+    if (head != NULL)
     {
-        printf("Element not found in the array\n");
+        temp = head;
+        head = head->next;
+        free(temp);
     }
-    else
+
+    temp = head;
+    while (temp != NULL)
     {
-
-        for (i = pos; i < n - 1; i++)
-        {
-            arr[i] = arr[i + 1];
-        }
-        n--;
-
-        printf("Array after deletion:\n");
-        for (i = 0; i < n; i++)
-        {
-            printf("%d ", arr[i]);
-        }
-        printf("\n");
+        printf("%d ", temp->data);
+        temp = temp->next;
     }
 
     return 0;

@@ -1,33 +1,34 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node *next;
+};
 
 int main()
 {
-    int arr[6];
-    int i, pos, value;
+    struct Node *head, *newNode, *temp;
+    int value;
 
-    printf("Enter 5 elements:\n");
-    for (i = 0; i < 5; i++)
-    {
-        scanf("%d", &arr[i]);
-    }
+    head = (struct Node *)malloc(sizeof(struct Node));
+    printf("Enter value for first node: ");
+    scanf("%d", &head->data);
+    head->next = NULL;
 
-    printf("Enter position to insert (0 to 5): ");
-    scanf("%d", &pos);
-
-    printf("Enter value to insert: ");
+    newNode = (struct Node *)malloc(sizeof(struct Node));
+    printf("Enter value to insert at beginning: ");
     scanf("%d", &value);
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
 
-    for (i = 5; i > pos; i--)
+    temp = head;
+    while (temp != NULL)
     {
-        arr[i] = arr[i - 1];
-    }
-
-    arr[pos] = value;
-
-    printf("Array after insertion:\n");
-    for (i = 0; i < 6; i++)
-    {
-        printf("%d ", arr[i]);
+        printf("%d ", temp->data);
+        temp = temp->next;
     }
 
     return 0;

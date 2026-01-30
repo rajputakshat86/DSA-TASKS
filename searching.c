@@ -1,34 +1,48 @@
 #include <stdio.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int data;
+    struct Node *next;
+};
 
 int main()
 {
-    int arr[10];
-    int i, key, found = 0;
+    struct Node *head, *temp;
+    int n, i, value, found = 0;
 
-    printf("Enter 10 elements:\n");
-    for (i = 0; i < 10; i++)
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+
+    head = NULL;
+
+    for (i = 0; i < n; i++)
     {
-        printf("Element at index %d: ", i);
-        scanf("%d", &arr[i]);
+        temp = (struct Node *)malloc(sizeof(struct Node));
+        scanf("%d", &temp->data);
+        temp->next = head;
+        head = temp;
     }
 
-    printf("\nEnter element to search: ");
-    scanf("%d", &key);
+    printf("Enter value to search: ");
+    scanf("%d", &value);
 
-    for (i = 0; i < 10; i++)
+    temp = head;
+    while (temp != NULL)
     {
-        if (arr[i] == key)
+        if (temp->data == value)
         {
             found = 1;
-            printf("Element found at index %d\n", i);
             break;
         }
+        temp = temp->next;
     }
 
-    if (found == 0)
-    {
-        printf("Element not found in the array\n");
-    }
+    if (found)
+        printf("%d is found in the linked list\n", value);
+    else
+        printf("%d is not found in the linked list\n", value);
 
     return 0;
 }
